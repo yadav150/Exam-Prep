@@ -61,3 +61,6 @@ function nextQuestion() {
 
 // Next button
 document.getElementById("nextBtn").onclick = nextQuestion;
+
+let timeLeft = 30;
+let timer;
