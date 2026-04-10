@@ -1,0 +1,25 @@
+body {
+  font-family: sans-serif;
+  background: #f5f7fb;
+  text-align: center;
+}
+
+.form {
+  max-width: 400px;
+  margin: 30px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  margin: 5px 0;
+  padding: 10px;
+}
+
+button {
+  padding: 10px;
+  background: #1e2a78;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
