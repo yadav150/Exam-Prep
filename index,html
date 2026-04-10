@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exam Prep</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- 🔹 Navbar -->
+<header class="navbar">
+  <div class="logo">ExamPrep</div>
+  <nav>
+    <a href="login.html">Login</a>
+    <a href="signup.html" class="btn">Sign Up</a>
+  </nav>
+</header>
+
+<!-- 🔹 Hero Section -->
+<section class="hero">
+  <h1>Boost Your Exam Preparation 🚀</h1>
+  <p>Practice topic-wise quizzes and improve your performance</p>
+</section>
+
+<!-- 🔹 Categories Section -->
+<section class="categories">
+  <h2>Choose Quiz Category</h2>
+
+  <div class="card-container">
+
+    <div class="card" onclick="goToQuiz('math')">
+      <h3>Mathematics</h3>
+      <p>Algebra, Geometry, Arithmetic</p>
+    </div>
+
+    <div class="card" onclick="goToQuiz('science')">
+      <h3>Science</h3>
+      <p>Physics, Chemistry, Biology</p>
+    </div>
+
+    <div class="card" onclick="goToQuiz('gk')">
+      <h3>General Knowledge</h3>
+      <p>Current Affairs & Static GK</p>
+    </div>
+
+    <div class="card" onclick="goToQuiz('english')">
+      <h3>English</h3>
+      <p>Grammar, Vocabulary</p>
+    </div>
+
+    <div class="card" onclick="goToQuiz('computer')">
+      <h3>Computer</h3>
+      <p>Basics, Programming</p>
+    </div>
+
+  </div>
+</section>
+
+<script src="js/app.js"></script>
+</body>
+</html>
