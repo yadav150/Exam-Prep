@@ -1,3 +1,7 @@
+// Get all users or empty array
+let users = JSON.parse(localStorage.getItem("users")) || [];
+
+// 🔹 SIGNUP
 function signup() {
   let name = document.getElementById("name").value;
   let email = document.getElementById("email").value;
@@ -8,17 +12,43 @@ function signup() {
     return;
   }
 
-  let user = {
-    name,
-    email,
-    password
-  };
+  // Check if user already exists
+  let exists = users.find(u => u.email === email);
 
-  // Save user in localStorage
-  localStorage.setItem("user", JSON.stringify(user));
+  if (exists) {
+    alert("User already exists ❌");
+    return;
+  }
 
-  alert("Signup successful!");
+  let user = { name, email, password };
 
-  // Redirect to login
+  users.push(user);
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Signup successful ✅");
+
   window.location.href = "login.html";
+}
+
+// 🔹 LOGIN
+function login() {
+  let email = document.getElementById("email").value;
+  let password = document.getElementById("password").value;
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  let user = users.find(u => u.email === email && u.password === password);
+
+  if (!user) {
+    alert("Invalid email or password ❌");
+    return;
+  }
+
+  // Save logged in user
+  localStorage.setItem("loggedInUser", JSON.stringify(user));
+
+  alert("Login successful 🎉");
+
+  window.location.href = "index.html";
 }
