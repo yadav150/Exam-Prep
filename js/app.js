@@ -1,10 +1,9 @@
-// Check login
-let user = JSON.parse(localStorage.getItem("loggedInUser"));
+document.addEventListener("DOMContentLoaded", function () {
+  let user = JSON.parse(localStorage.getItem("loggedInUser"));
+  let nav = document.getElementById("navLinks");
 
-// Navbar control (only if nav exists)
-let nav = document.getElementById("navLinks");
+  if (!nav) return;
 
-if (nav) {
   if (user) {
     nav.innerHTML = `
       <a href="dashboard.html">Dashboard</a>
@@ -16,25 +15,9 @@ if (nav) {
       <a href="signup.html">Sign Up</a>
     `;
   }
-}
+});
 
-// Logout
 function logout() {
   localStorage.removeItem("loggedInUser");
   location.reload();
-}
-
-// 🔥 UPDATED QUIZ FUNCTION (with login check)
-function goToQuiz(category) {
-  if (!user) {
-    alert("Please login first 🔐");
-    window.location.href = "login.html";
-    return;
-  }
-
-  // Save selected category
-  localStorage.setItem("quizCategory", category);
-
-  // Redirect
-  window.location.href = "quiz.html";
 }
