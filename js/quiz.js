@@ -10,13 +10,24 @@ let timer;
 fetch("data/questions.json")
   .then(res => res.json())
   .then(data => {
-    // Filter by category
-    questions = data.filter(q => q.category === selectedCategory);
+
+    let custom = JSON.parse(localStorage.getItem("customQuestions")) || [];
+
+    let allQuestions = [...data, ...custom];
+
+    let selectedSet = localStorage.getItem("quizSet");
+
+    questions = allQuestions.filter(q =>
+      q.category === selectedCategory && q.set === selectedSet
+    );
 
     if (questions.length === 0) {
       document.getElementById("question").innerText = "No questions available";
       return;
     }
+
+    loadQuestion();
+  });
 
     loadQuestion();
   });
