@@ -1,3 +1,4 @@
+// ✅ Import from CDN (IMPORTANT for GitHub hosting)
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
   getAuth,
@@ -5,12 +6,15 @@ import {
   signInWithPopup
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-// 🔥 Your Firebase config (PASTE YOURS HERE)
+// 🔥 Your Firebase config (already correct)
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  appId: "YOUR_APP_ID"
+  apiKey: "AIzaSyDRcgEc428zLbEDVP8LmN7DPubfwTFhN9U",
+  authDomain: "heartspace-app.firebaseapp.com",
+  projectId: "heartspace-app",
+  storageBucket: "heartspace-app.firebasestorage.app",
+  messagingSenderId: "706297788927",
+  appId: "1:706297788927:web:a4c15b425eeab93bd70fca",
+  measurementId: "G-D6CKEG9BV8"
 };
 
 // Init
@@ -24,7 +28,7 @@ window.googleLogin = function () {
     .then((result) => {
       const user = result.user;
 
-      // Save user (same format as your system)
+      // Save user in your system format
       const userData = {
         name: user.displayName,
         email: user.email
@@ -37,5 +41,6 @@ window.googleLogin = function () {
     })
     .catch((error) => {
       alert(error.message);
+      console.error(error);
     });
 };
