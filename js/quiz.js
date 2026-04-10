@@ -76,17 +76,28 @@ function nextQuestion() {
   } else {
     clearInterval(timer);
 
-    // Save score
+    // 🔥 Get logged in user
+    let user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+    // 🔥 Get existing leaderboard
+    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+    // 🔥 Add new score
+    if (user) {
+      leaderboard.push({
+        name: user.name,
+        score: score,
+        total: questions.length
+      });
+
+      localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+    }
+
+    // ✅ Keep existing result system (unchanged)
     localStorage.setItem("quizScore", score);
     localStorage.setItem("totalQuestions", questions.length);
 
-    // Go to result page
+    // Redirect
     window.location.href = "result.html";
   }
 }
-
-// Next button
-document.getElementById("nextBtn").onclick = () => {
-  clearInterval(timer);
-  nextQuestion();
-};
