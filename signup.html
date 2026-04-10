@@ -11,15 +11,21 @@
 <div class="auth-container">
   <h2>Create Account</h2>
 
-  <input type="text" id="name" placeholder="Full Name">
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
+  <input type="text" placeholder="Full Name">
+  <input type="email" placeholder="Email">
+  <input type="password" placeholder="Password">
 
-  <button onclick="signup()">Sign Up</button>
+  <button class="main-btn">Sign Up</button>
+
+  <div class="divider">OR</div>
+
+  <button class="google-btn">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+    Continue with Google
+  </button>
 
   <p>Already have an account? <a href="login.html">Login</a></p>
 </div>
 
-<script src="js/auth.js"></script>
 </body>
 </html>
