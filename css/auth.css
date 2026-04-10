@@ -7,39 +7,73 @@ body {
   height: 100vh;
 }
 
-/* Box */
+/* Container */
 .auth-container {
   background: white;
   padding: 30px;
-  width: 300px;
-  border-radius: 10px;
+  width: 320px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
 }
 
 .auth-container h2 {
   margin-bottom: 20px;
+  color: #1e2a78;
 }
 
+/* Inputs */
 input {
   width: 100%;
-  margin: 8px 0;
   padding: 10px;
-  border: 1px solid #ccc;
+  margin: 8px 0;
+  border: 1px solid #ddd;
   border-radius: 5px;
 }
 
-button {
+/* Main Button */
+.main-btn {
   width: 100%;
   padding: 10px;
-  margin-top: 10px;
   background: #1e2a78;
   color: white;
   border: none;
   border-radius: 5px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
+/* Divider */
+.divider {
+  margin: 15px 0;
+  color: #888;
+}
+
+/* Google Button */
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  background: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.google-btn img {
+  width: 18px;
+}
+
+/* Links */
 p {
   margin-top: 15px;
+  font-size: 14px;
+}
+
+a {
+  color: #1e2a78;
+  text-decoration: none;
 }
