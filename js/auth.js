@@ -52,3 +52,14 @@ function login() {
 
   window.location.href = "index.html";
 }
+
+// 🔥 Auto redirect if already logged in
+let currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+
+if (currentUser && window.location.pathname.includes("login.html")) {
+  window.location.href = "dashboard.html";
+}
+
+if (currentUser && window.location.pathname.includes("signup.html")) {
+  window.location.href = "dashboard.html";
+}
