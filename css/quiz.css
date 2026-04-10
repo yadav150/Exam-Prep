@@ -55,3 +55,8 @@ body {
   border-radius: 5px;
   cursor: pointer;
 }
+#timer {
+  text-align: right;
+  color: red;
+  margin-bottom: 10px;
+}
