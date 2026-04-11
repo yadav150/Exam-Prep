@@ -8,23 +8,41 @@
 </head>
 <body>
 
+<!-- 🔹 Navbar -->
+<header class="navbar">
+  <div class="logo">ExamPrep</div>
+  <nav>
+    <a href="index.html">Home</a>
+  </nav>
+</header>
+
+<!-- 🔹 Login Box -->
 <div class="auth-container">
-  <h2>Login</h2>
+  <h2>Welcome Back 👋</h2>
 
-  <input type="email" placeholder="Email">
-  <input type="password" placeholder="Password">
+  <!-- Email -->
+  <input type="email" id="email" placeholder="Enter your email" required>
 
-  <button class="main-btn">Login</button>
+  <!-- Password -->
+  <input type="password" id="password" placeholder="Enter your password" required>
+
+  <!-- Login Button -->
+  <button class="main-btn" onclick="login()">Login</button>
 
   <div class="divider">OR</div>
 
- <button class="google-btn" onclick="googleLogin()">
-  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
-  Continue with Google
-</button>
+  <!-- Google Login -->
+  <button class="google-btn" onclick="googleLogin()">
+    <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg">
+    Continue with Google
+  </button>
 
   <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
 </div>
+
+<!-- Scripts -->
+<script src="js/auth.js"></script>
 <script type="module" src="js/googleAuth.js"></script>
+
 </body>
 </html>
