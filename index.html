@@ -4,11 +4,207 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Exam Prep</title>
-  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial;
+    }
+
+    body{
+      background:#f5f7fb;
+      color:#1a1a1a;
+    }
+
+    .container{
+      width:100%;
+      max-width:1100px;
+      margin:auto;
+      padding:0 16px;
+    }
+
+    /* NAVBAR */
+    .navbar{
+      background:#1e2a78;
+      color:#fff;
+      padding:14px 0;
+    }
+
+    .nav-wrap{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+    }
+
+    .logo{
+      font-size:20px;
+      font-weight:700;
+      letter-spacing:0.5px;
+    }
+
+    /* HERO */
+    .hero{
+      padding:60px 0 30px;
+      text-align:center;
+    }
+
+    .hero h1{
+      font-size:34px;
+      font-weight:800;
+      color:#1e2a78;
+    }
+
+    .hero p{
+      margin-top:10px;
+      color:#555;
+      font-size:15px;
+    }
+
+    .hero-stats{
+      margin-top:25px;
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+
+    .stat{
+      background:#fff;
+      padding:14px 18px;
+      border-radius:10px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.08);
+      min-width:120px;
+    }
+
+    .stat h3{
+      color:#1e2a78;
+      font-size:18px;
+    }
+
+    .stat p{
+      font-size:12px;
+      color:#666;
+    }
+
+    /* STRIP */
+    .exam-strip{
+      margin:20px 0;
+      background:#1e2a78;
+      color:#fff;
+      padding:18px 0;
+      text-align:center;
+    }
+
+    .exam-strip h2{
+      font-size:18px;
+    }
+
+    .exam-strip p{
+      margin-top:6px;
+      font-size:13px;
+      opacity:0.9;
+    }
+
+    /* CATEGORIES */
+    .categories{
+      padding:30px 0;
+      text-align:center;
+    }
+
+    .categories h2{
+      font-size:22px;
+      margin-bottom:18px;
+      color:#1e2a78;
+    }
+
+    .card-container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(160px,1fr));
+      gap:14px;
+    }
+
+    .card{
+      background:#fff;
+      border:none;
+      padding:18px;
+      border-radius:12px;
+      cursor:pointer;
+      text-align:left;
+      box-shadow:0 4px 10px rgba(0,0,0,0.08);
+      transition:0.2s;
+    }
+
+    .card:hover{
+      transform:translateY(-4px);
+    }
+
+    .card h3{
+      color:#1e2a78;
+      font-size:16px;
+    }
+
+    .card p{
+      margin-top:6px;
+      font-size:12px;
+      color:#666;
+    }
+
+    /* FEATURES */
+    .features{
+      padding:30px 0;
+      text-align:center;
+    }
+
+    .features h2{
+      color:#1e2a78;
+      margin-bottom:18px;
+    }
+
+    .feature-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(200px,1fr));
+      gap:14px;
+    }
+
+    .feature{
+      background:#fff;
+      padding:16px;
+      border-radius:10px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.06);
+    }
+
+    .feature h3{
+      font-size:15px;
+      color:#1e2a78;
+    }
+
+    .feature p{
+      margin-top:6px;
+      font-size:12px;
+      color:#666;
+    }
+
+    /* FOOTER */
+    .footer{
+      margin-top:30px;
+      background:#1e2a78;
+      color:#fff;
+      text-align:center;
+      padding:14px 0;
+      font-size:13px;
+    }
+
+    @media(max-width:600px){
+      .hero h1{font-size:26px;}
+    }
+
+  </style>
 </head>
+
 <body>
 
-<!-- 🔹 Navbar -->
 <header class="navbar">
   <div class="container nav-wrap">
     <div class="logo">ExamPrep</div>
@@ -16,38 +212,26 @@
   </div>
 </header>
 
-<!-- 🔹 Hero -->
 <section class="hero">
-  <div class="container hero-wrap">
+  <div class="container">
     <h1>Boost Your Exam Preparation 🚀</h1>
     <p>Practice topic-wise quizzes and improve your performance</p>
 
     <div class="hero-stats">
-      <div class="stat">
-        <h3>500+</h3>
-        <p>Questions</p>
-      </div>
-      <div class="stat">
-        <h3>5+</h3>
-        <p>Subjects</p>
-      </div>
-      <div class="stat">
-        <h3>24/7</h3>
-        <p>Practice</p>
-      </div>
+      <div class="stat"><h3>500+</h3><p>Questions</p></div>
+      <div class="stat"><h3>5+</h3><p>Subjects</p></div>
+      <div class="stat"><h3>24/7</h3><p>Practice</p></div>
     </div>
   </div>
 </section>
 
-<!-- 🔹 Competitive Exam Strip -->
 <section class="exam-strip">
-  <div class="container strip-wrap">
+  <div class="container">
     <h2>Competitive Exam Preparation</h2>
     <p>SSC • Banking • Railway • State Exams • School Tests</p>
   </div>
 </section>
 
-<!-- 🔹 Categories -->
 <section class="categories">
   <div class="container">
     <h2>Choose Quiz Category</h2>
@@ -83,10 +267,8 @@
   </div>
 </section>
 
-<!-- 🔹 Features Section -->
 <section class="features">
   <div class="container">
-
     <h2>Why Choose ExamPrep?</h2>
 
     <div class="feature-grid">
@@ -97,30 +279,26 @@
       </div>
 
       <div class="feature">
-        <h3>📊 Track Progress</h3>
-        <p>See your score improvement over time</p>
+        <h3>📊 Progress Tracking</h3>
+        <p>Track your improvement easily</p>
       </div>
 
       <div class="feature">
         <h3>🎯 Topic Wise</h3>
-        <p>Focused learning for each subject</p>
+        <p>Focused learning system</p>
       </div>
 
       <div class="feature">
-        <h3>🏆 Competitive Edge</h3>
-        <p>Prepare for real exams with mock tests</p>
+        <h3>🏆 Exam Ready</h3>
+        <p>Practice like real exams</p>
       </div>
 
     </div>
-
   </div>
 </section>
 
-<!-- 🔻 Footer -->
 <footer class="footer">
-  <div class="container footer-wrap">
-    <p>Made with ❤️ by Yadav Subba</p>
-  </div>
+  Made with ❤️ by Yadav Subba
 </footer>
 
 <script src="js/app.js"></script>
