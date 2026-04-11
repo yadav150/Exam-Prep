@@ -11,28 +11,41 @@
 <!-- 🔹 Navbar -->
 <header class="navbar">
   <div class="logo">ExamPrep</div>
-  <button onclick="logout()">Logout</button>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="leaderboard.html">Leaderboard</a>
+    <button class="logout-btn" onclick="logout()">Logout</button>
+  </nav>
 </header>
 
 <!-- 🔹 Welcome -->
 <section class="welcome">
-  <h2 id="welcomeText">Welcome</h2>
+  <div class="container">
+    <h2 id="welcomeText">Welcome 👋</h2>
+  </div>
 </section>
 
 <!-- 🔹 Categories -->
 <section class="categories">
-  <h3>Choose Quiz</h3>
+  <div class="container">
+    <h3>Choose Quiz</h3>
 
-  <div class="card-container">
+    <div class="card-container">
 
-    <div class="card" onclick="startQuiz('math')">Mathematics</div>
-    <div class="card" onclick="startQuiz('science')">Science</div>
-    <div class="card" onclick="startQuiz('gk')">General Knowledge</div>
-    <div class="card" onclick="startQuiz('english')">English</div>
-    <div class="card" onclick="startQuiz('computer')">Computer</div>
+      <button class="card" onclick="startQuiz('math')">Mathematics</button>
+      <button class="card" onclick="startQuiz('science')">Science</button>
+      <button class="card" onclick="startQuiz('gk')">General Knowledge</button>
+      <button class="card" onclick="startQuiz('english')">English</button>
+      <button class="card" onclick="startQuiz('computer')">Computer</button>
 
+    </div>
   </div>
 </section>
+
+<!-- 🔻 Footer -->
+<footer class="footer">
+  <p>Made with ❤️ by Yadav Subba</p>
+</footer>
 
 <script src="js/dashboard.js"></script>
 </body>
