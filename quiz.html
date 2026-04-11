@@ -16,29 +16,31 @@
 <!-- 🔹 Quiz Wrapper -->
 <div class="quiz-wrapper">
 
-  <!-- 🔹 Quiz Container -->
+  <!-- 🔹 Quiz Box -->
   <div class="quiz-container">
 
-    <!-- Category -->
+    <!-- Category + Timer -->
     <div class="quiz-top">
       <h4 id="quizCategoryText">Category</h4>
       <h3 id="timer">Time Left: 30s</h3>
     </div>
 
     <!-- Question -->
-    <h2 id="question">Loading question...</h2>
+    <div class="question-box">
+      <h2 id="question">Loading question...</h2>
+    </div>
 
     <!-- Options -->
     <div class="options">
-      <button class="option">Option 1</button>
-      <button class="option">Option 2</button>
-      <button class="option">Option 3</button>
-      <button class="option">Option 4</button>
+      <button class="option" data-index="0">Option 1</button>
+      <button class="option" data-index="1">Option 2</button>
+      <button class="option" data-index="2">Option 3</button>
+      <button class="option" data-index="3">Option 4</button>
     </div>
 
     <!-- Controls -->
     <div class="controls">
-      <button id="nextBtn">Next</button>
+      <button id="nextBtn">Next Question</button>
     </div>
 
   </div>
