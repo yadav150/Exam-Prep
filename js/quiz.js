@@ -1,39 +1,48 @@
 let questions = [];
 let currentQuestion = 0;
 let score = 0;
+
 let selectedCategory = localStorage.getItem("quizCategory");
+let selectedSet = localStorage.getItem("quizSet") || null;
 
 let timeLeft = 30;
 let timer;
 
-// Fetch questions
-fetch("data/questions.json")
-  .then(res => res.json())
-  .then(data => {
+// 🚀 LOAD QUESTIONS (FIXED + CLEAN)
+function loadQuestions() {
 
-    let custom = JSON.parse(localStorage.getItem("customQuestions")) || [];
+  fetch("data/questions.json")
+    .then(res => res.json())
+    .then(data => {
 
-    let allQuestions = [...data, ...custom];
+      let custom = JSON.parse(localStorage.getItem("customQuestions")) || [];
 
-    let selectedSet = localStorage.getItem("quizSet");
+      let allQuestions = [...data, ...custom];
 
-    questions = allQuestions.filter(q =>
-      q.category === selectedCategory && q.set === selectedSet
-    );
+      // Filter by category + set
+      questions = allQuestions.filter(q =>
+        q.category === selectedCategory &&
+        (!selectedSet || q.set === selectedSet)
+      );
 
-    if (questions.length === 0) {
-      document.getElementById("question").innerText = "No questions available";
-      return;
-    }
+      if (questions.length === 0) {
+        document.getElementById("question").innerText = "No questions available";
+        return;
+      }
 
-    loadQuestion();
-  });
+      // Show category
+      document.getElementById("quizCategoryText").innerText =
+        "Category: " + selectedCategory;
 
-    loadQuestion();
-  });
+      loadQuestion();
+    });
+}
 
+loadQuestions();
+
+// 📌 LOAD QUESTION
 function loadQuestion() {
-  clearInterval(timer); // reset timer
+  clearInterval(timer);
 
   let q = questions[currentQuestion];
 
@@ -45,14 +54,15 @@ function loadQuestion() {
     btn.innerText = q.options[index];
 
     btn.onclick = () => {
-      clearInterval(timer); // stop timer when user clicks
+      clearInterval(timer);
       checkAnswer(btn.innerText);
     };
   });
 
-  startTimer(); // start timer for each question
+  startTimer();
 }
 
+// ⏳ TIMER
 function startTimer() {
   timeLeft = 30;
 
@@ -69,6 +79,7 @@ function startTimer() {
   }, 1000);
 }
 
+// ✅ CHECK ANSWER
 function checkAnswer(selected) {
   let correct = questions[currentQuestion].answer;
 
@@ -79,36 +90,68 @@ function checkAnswer(selected) {
   nextQuestion();
 }
 
+// ⏭ NEXT
 function nextQuestion() {
   currentQuestion++;
 
   if (currentQuestion < questions.length) {
     loadQuestion();
   } else {
-    clearInterval(timer);
-
-    // 🔥 Get logged in user
-    let user = JSON.parse(localStorage.getItem("loggedInUser"));
-
-    // 🔥 Get existing leaderboard
-    let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
-
-    // 🔥 Add new score
-    if (user) {
-      leaderboard.push({
-        name: user.name,
-        score: score,
-        total: questions.length
-      });
-
-      localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
-    }
-
-    // ✅ Keep existing result system (unchanged)
-    localStorage.setItem("quizScore", score);
-    localStorage.setItem("totalQuestions", questions.length);
-
-    // Redirect
-    window.location.href = "result.html";
+    endQuiz();
   }
 }
+
+// 🔚 END QUIZ
+function endQuiz() {
+  clearInterval(timer);
+
+  let user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  let leaderboard = JSON.parse(localStorage.getItem("leaderboard")) || [];
+
+  if (user) {
+    leaderboard.push({
+      name: user.name,
+      score: score,
+      total: questions.length,
+      category: selectedCategory
+    });
+
+    localStorage.setItem("leaderboard", JSON.stringify(leaderboard));
+  }
+
+  localStorage.setItem("quizScore", score);
+  localStorage.setItem("totalQuestions", questions.length);
+
+  window.location.href = "result.html";
+}
+
+// 🔘 BUTTONS
+
+// Next button
+document.getElementById("nextBtn").onclick = () => {
+  clearInterval(timer);
+  nextQuestion();
+};
+
+// Skip button
+document.getElementById("skipBtn").onclick = () => {
+  clearInterval(timer);
+  nextQuestion();
+};
+
+// Back button
+document.getElementById("backBtn").onclick = () => {
+  if (currentQuestion > 0) {
+    currentQuestion--;
+    loadQuestion();
+  }
+};
+
+// Exit button
+document.getElementById("exitBtn").onclick = () => {
+  let confirmExit = confirm("Are you sure you want to exit?");
+  if (confirmExit) {
+    window.location.href = "dashboard.html";
+  }
+};
