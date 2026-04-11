@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz</title>
+  <title>Quiz - ExamPrep</title>
   <link rel="stylesheet" href="css/quiz.css">
 </head>
 <body>
@@ -13,22 +13,35 @@
   <div class="logo">ExamPrep</div>
 </header>
 
-<div class="quiz-container">
+<!-- 🔹 Quiz Wrapper -->
+<div class="quiz-wrapper">
 
-  <h3 id="timer">Time Left: 30s</h3>
+  <!-- 🔹 Quiz Container -->
+  <div class="quiz-container">
 
-  <h2 id="question">Question will appear here</h2>
+    <!-- Category -->
+    <div class="quiz-top">
+      <h4 id="quizCategoryText">Category</h4>
+      <h3 id="timer">Time Left: 30s</h3>
+    </div>
 
-  <!-- Options -->
-  <div class="options">
-    <button class="option">Option 1</button>
-    <button class="option">Option 2</button>
-    <button class="option">Option 3</button>
-    <button class="option">Option 4</button>
+    <!-- Question -->
+    <h2 id="question">Loading question...</h2>
+
+    <!-- Options -->
+    <div class="options">
+      <button class="option">Option 1</button>
+      <button class="option">Option 2</button>
+      <button class="option">Option 3</button>
+      <button class="option">Option 4</button>
+    </div>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button id="nextBtn">Next</button>
+    </div>
+
   </div>
-
-  <!-- Next Button -->
-  <button id="nextBtn">Next</button>
 
 </div>
 
