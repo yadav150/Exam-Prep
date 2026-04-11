@@ -1,18 +1,22 @@
-// Get all users or empty array
-let users = JSON.parse(localStorage.getItem("users")) || [];
+// 🔹 Get users (always fresh)
+function getUsers() {
+  return JSON.parse(localStorage.getItem("users")) || [];
+}
 
 // 🔹 SIGNUP
 function signup() {
-  let name = document.getElementById("name").value;
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
 
   if (!name || !email || !password) {
-    alert("Please fill all fields");
+    alert("Please fill all fields ❗");
     return;
   }
 
-  // Check if user already exists
+  let users = getUsers();
+
+  // Check existing user
   let exists = users.find(u => u.email === email);
 
   if (exists) {
@@ -33,10 +37,15 @@ function signup() {
 
 // 🔹 LOGIN
 function login() {
-  let email = document.getElementById("email").value;
-  let password = document.getElementById("password").value;
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
 
-  let users = JSON.parse(localStorage.getItem("users")) || [];
+  if (!email || !password) {
+    alert("Please enter email & password ❗");
+    return;
+  }
+
+  let users = getUsers();
 
   let user = users.find(u => u.email === email && u.password === password);
 
@@ -50,16 +59,16 @@ function login() {
 
   alert("Login successful 🎉");
 
-  window.location.href = "index.html";
+  window.location.href = "dashboard.html"; // 🔥 FIXED (better UX)
 }
 
-// 🔥 Auto redirect if already logged in
-let currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
+// 🔹 AUTO REDIRECT (safer)
+document.addEventListener("DOMContentLoaded", () => {
+  let currentUser = JSON.parse(localStorage.getItem("loggedInUser"));
 
-if (currentUser && window.location.pathname.includes("login.html")) {
-  window.location.href = "dashboard.html";
-}
+  let path = window.location.pathname;
 
-if (currentUser && window.location.pathname.includes("signup.html")) {
-  window.location.href = "dashboard.html";
-}
+  if (currentUser && (path.includes("login.html") || path.includes("signup.html"))) {
+    window.location.href = "dashboard.html";
+  }
+});
