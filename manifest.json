@@ -1,0 +1,27 @@
+{
+  "name": "Yadav Authentication Project",
+  "short_name": "Yadav Auth",
+  "description": "Secure Firebase authentication demo by Yadav Subba.",
+  "start_url": "/authp/index.html",
+  "display": "standalone",
+  "background_color": "#fcfcfc",
+  "theme_color": "#191919",
+  "icons": [
+    {
+      "src": "shield-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "shield-icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "shield-icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ]
+}
