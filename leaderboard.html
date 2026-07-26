@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Leaderboard · Yadav Authentication Project</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="leaderboard.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-title">Yadav Auth</a>
+    </div>
+  </header>
+
+  <main class="dashboard">
+    <div class="leaderboard-container">
+      <h1 class="auth-title">Leaderboard</h1>
+      <p class="auth-subtitle">Top scores from all players</p>
+
+      <!-- Scores will be loaded here by JS -->
+      <div id="leaderboardTable"></div>
+
+      <div class="leaderboard-actions">
+        <a href="quiz.html" class="btn">Take Quiz Again</a>
+        <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="auth.html">Auth</a>
+        <a href="quiz.html">Quiz</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="legal/about.html">About</a>
+      </div>
+      <p class="footer-copy">&copy; 2026 Yadav Authentication Project. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script type="module" src="leaderboard.js"></script>
+</body>
+</html>
