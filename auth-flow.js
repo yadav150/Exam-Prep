@@ -60,6 +60,6 @@ onAuthStateChanged(auth, (user) => {
 
   if (user) {
     // User is logged in → send to dashboard
-    window.location.href = 'quiz.html';
+    window.location.href = 'dashboard.html';
   }
 });
