@@ -1,4 +1,4 @@
-import { db } from './firestore-init.js';
+import { db } from '../firestore-init.js';
 import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 // ===== Gate elements =====
@@ -26,12 +26,10 @@ captchaSubmit.addEventListener('click', () => {
   const userAnswer = parseInt(captchaAnswer.value, 10);
   if (isNaN(userAnswer) || userAnswer !== expectedAnswer) {
     captchaMsg.innerHTML = '<div class="error-msg">Incorrect answer. Try again.</div>';
-    // Regenerate a new question to avoid simple retries
     generateCaptcha();
     captchaAnswer.value = '';
     return;
   }
-  // Correct CAPTCHA → show password gate
   captchaMsg.innerHTML = '';
   captchaGate.style.display = 'none';
   passwordGate.style.display = 'block';
@@ -48,14 +46,55 @@ passwordSubmit.addEventListener('click', () => {
     passwordMsg.innerHTML = '<div class="error-msg">Incorrect password.</div>';
     return;
   }
-  // Password correct → load reports
   passwordMsg.innerHTML = '';
   passwordGate.style.display = 'none';
-  // Show loading spinner while fetching
   loadingOverlay.classList.remove('hidden');
   adminContent.style.display = 'block';
   loadReports();
+  startSessionTimer();
 });
+
+// ===== Close panel button =====
+document.getElementById('closePanelBtn').addEventListener('click', () => {
+  window.location.href = '../index.html';
+});
+
+// ===== Session timer (10‑minute inactivity timeout) =====
+let sessionSeconds = 0;
+let inactivityTimer;
+const TIMEOUT_SECONDS = 10 * 60; // 10 minutes
+const sessionTimerEl = document.getElementById('sessionTimer');
+const sessionExpiredModal = document.getElementById('sessionExpiredModal');
+
+function startSessionTimer() {
+  updateTimerDisplay();
+  resetInactivityTimer();
+
+  window.addEventListener('mousemove', resetInactivityTimer);
+  window.addEventListener('keydown', resetInactivityTimer);
+  window.addEventListener('click', resetInactivityTimer);
+  window.addEventListener('scroll', resetInactivityTimer);
+}
+
+function resetInactivityTimer() {
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(() => {
+    // Show the expired modal
+    sessionExpiredModal.classList.add('active');
+    // Redirect after 5 seconds
+    setTimeout(() => {
+      window.location.href = '../index.html';
+    }, 5000);
+  }, TIMEOUT_SECONDS * 1000);
+}
+
+function updateTimerDisplay() {
+  sessionSeconds++;
+  const mins = Math.floor(sessionSeconds / 60);
+  const secs = sessionSeconds % 60;
+  sessionTimerEl.textContent = `Session active: ${mins}m ${secs}s`;
+  setTimeout(updateTimerDisplay, 1000);
+}
 
 // ===== Fetch reports from Firestore =====
 async function loadReports() {
@@ -72,7 +111,7 @@ async function loadReports() {
         html += `
           <div class="report-card">
             <div class="report-meta">
-              <span><strong>${data.user}</strong></span>
+              <span><strong>${escapeHtml(data.user)}</strong></span>
               <span>${new Date(data.timestamp).toLocaleString('en-IN')}</span>
             </div>
             <div class="report-message">${escapeHtml(data.message)}</div>
@@ -87,7 +126,6 @@ async function loadReports() {
   }
 }
 
-// Simple HTML escape to prevent XSS
 function escapeHtml(text) {
   const div = document.createElement('div');
   div.textContent = text;
