@@ -1,6 +1,6 @@
 import { auth } from './firebase.js';
 import { db } from './firestore-init.js';
-import { collection, addDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
+import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 const FORMSPREE_URL = 'https://formspree.io/f/xaqraljr';
 
@@ -21,25 +21,19 @@ if (submitBtn && issueTextarea && issueMsg) {
     issueMsg.innerHTML = '';
 
     try {
-      // 1. Send to Formspree
-      const formspreePromise = fetch(FORMSPREE_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          message: message,
-          user: auth.currentUser?.email || 'Anonymous',
-          timestamp: new Date().toISOString()
-        })
-      });
-
-      // 2. Save to Firestore
-      const firestorePromise = addDoc(collection(db, 'reports'), {
+      // 1. Save to Firestore
+      await addDoc(collection(db, "reports"), {
         message: message,
         user: auth.currentUser?.email || 'Anonymous',
-        timestamp: new Date().toISOString()
+        createdAt: serverTimestamp()
       });
 
-      await Promise.all([formspreePromise, firestorePromise]);
+      // 2. Also send to Formspree (fire-and-forget)
+      fetch(FORMSPREE_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, user: auth.currentUser?.email || 'Anonymous' })
+      }).catch(() => {});  // ignore Formspree errors – Firestore is primary
 
       issueMsg.innerHTML = '<div class="success-msg">Thank you! Your message has been sent.</div>';
       issueTextarea.value = '';
