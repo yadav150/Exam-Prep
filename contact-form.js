@@ -12,7 +12,7 @@ const msgDiv = document.getElementById('contactMsg');
 const successModal = document.getElementById('contactSuccessModal');
 const closeModalBtn = document.getElementById('closeContactModal');
 
-// Show/hide custom subject field based on dropdown
+// Show/hide custom subject field when "Other" is selected
 subjectType.addEventListener('change', () => {
   if (subjectType.value === 'Other') {
     customSubjectGroup.style.display = 'block';
@@ -20,9 +20,11 @@ subjectType.addEventListener('change', () => {
   } else {
     customSubjectGroup.style.display = 'none';
     subjectInput.required = false;
+    subjectInput.value = '';   // clear any previous custom text
   }
 });
 
+// Helper to show error/success message
 function showInlineMsg(element, message, type) {
   const className = type === 'success' ? 'success-msg' : 'error-msg';
   element.innerHTML = `<div class="${className}">${message}</div>`;
@@ -31,7 +33,7 @@ function showInlineMsg(element, message, type) {
 contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  // Determine the final subject
+  // Determine final subject
   let finalSubject = '';
   if (subjectType.value === 'Other') {
     finalSubject = subjectInput.value.trim();
@@ -71,7 +73,7 @@ contactForm.addEventListener('submit', async (e) => {
     customSubjectGroup.style.display = 'none';
     subjectInput.value = '';
     messageInput.value = '';
-    showInlineMsg(msgDiv, '', ''); // clear any error
+    showInlineMsg(msgDiv, '', '');
 
     // Show success modal
     successModal.classList.add('active');
@@ -85,7 +87,7 @@ contactForm.addEventListener('submit', async (e) => {
   }
 });
 
-// Modal close
+// Modal close handlers
 closeModalBtn.addEventListener('click', () => successModal.classList.remove('active'));
 successModal.addEventListener('click', (e) => {
   if (e.target === successModal) successModal.classList.remove('active');
