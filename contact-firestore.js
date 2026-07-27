@@ -1,7 +1,6 @@
-// Contact form handler for Help & Support panel
-// No existing files are modified.
-
 import { auth } from './firebase.js';
+import { db } from './firestore-init.js';
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 const FORMSPREE_URL = 'https://formspree.io/f/xaqraljr';
 
@@ -22,7 +21,8 @@ if (submitBtn && issueTextarea && issueMsg) {
     issueMsg.innerHTML = '';
 
     try {
-      const response = await fetch(FORMSPREE_URL, {
+      // 1. Send to Formspree
+      const formspreePromise = fetch(FORMSPREE_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -32,12 +32,17 @@ if (submitBtn && issueTextarea && issueMsg) {
         })
       });
 
-      if (response.ok) {
-        issueMsg.innerHTML = '<div class="success-msg">Thank you! Your message has been sent.</div>';
-        issueTextarea.value = '';
-      } else {
-        throw new Error('Submission failed');
-      }
+      // 2. Save to Firestore
+      const firestorePromise = addDoc(collection(db, 'reports'), {
+        message: message,
+        user: auth.currentUser?.email || 'Anonymous',
+        timestamp: new Date().toISOString()
+      });
+
+      await Promise.all([formspreePromise, firestorePromise]);
+
+      issueMsg.innerHTML = '<div class="success-msg">Thank you! Your message has been sent.</div>';
+      issueTextarea.value = '';
     } catch (error) {
       issueMsg.innerHTML = '<div class="error-msg">Failed to send. Please try again later.</div>';
     } finally {
