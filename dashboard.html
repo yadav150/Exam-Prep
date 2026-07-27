@@ -129,13 +129,14 @@
 </div>
 
     <div id="helpSupportPanel" class="option-panel">
-      <h2>Help &amp; Support</h2>
-      <p>If you need assistance, please check the documentation or contact support.<br/>Email: yadavsubba2003@gmail.com</p>
-      <h3 style="font-size:1.1rem; margin:20px 0 12px; color:var(--primary-color);">Report an Issue</h3>
-      <p>Describe the problem you encountered.</p>
-      <textarea rows="4" placeholder="Explain the issue..."></textarea>
-      <button class="btn-submit" onclick="alert('Issue reported (demo)')">Submit Report</button>
-    </div>
+  <h2>Help &amp; Support</h2>
+  <p>If you need assistance, please check the documentation or contact support.<br/>Email: yadavsubba2003@gmail.com</p>
+  <h3 style="font-size:1.1rem; margin:20px 0 12px; color:var(--primary-color);">Report an Issue</h3>
+  <p>Describe the problem you encountered.</p>
+  <textarea id="issueDescription" rows="4" placeholder="Explain the issue..."></textarea>
+  <button class="btn-submit" id="submitIssueBtn">Submit Report</button>
+  <div id="issueMsg" style="margin-top:12px;"></div>
+</div>
     <div id="deleteAccountPanel" class="option-panel">
   <h2>Delete Account</h2>
   <p style="color:#c00;">Warning: This action is permanent and cannot be undone. All your data will be lost.</p>
@@ -212,5 +213,6 @@
   <script type="module" src="dashboard-settings.js"></script>
   <script type="module" src="delete-account.js"></script>
   <script type="module" src="session-timeout.js"></script>
+  <script type="module" src="contact-form.js"></script>
 </body>
 </html>
