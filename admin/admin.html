@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel · Yadav Authentication Project</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="admin.css" />
+</head>
+<body>
+
+  <!-- Loading overlay (blur background + spinner) – identical to dashboard -->
+  <div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="site-title">Yadav Auth</a>
+    </div>
+  </header>
+
+  <main class="dashboard" style="max-width:800px;">
+    <!-- CAPTCHA gate -->
+    <div id="captchaGate" class="option-panel active">
+      <h2>Verification Required</h2>
+      <p>Solve the simple math problem to proceed.</p>
+      <div class="form-group">
+        <label id="captchaQuestion"></label>
+        <input type="text" id="captchaAnswer" placeholder="Your answer" />
+      </div>
+      <button class="btn-submit" id="captchaSubmit">Submit</button>
+      <div id="captchaMsg" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- Password gate (hidden initially) -->
+    <div id="passwordGate" class="option-panel" style="display:none;">
+      <h2>Enter Admin Password</h2>
+      <div class="form-group">
+        <input type="password" id="adminPassword" placeholder="Password" />
+      </div>
+      <button class="btn-submit" id="passwordSubmit">Submit</button>
+      <div id="passwordMsg" style="margin-top:12px;"></div>
+    </div>
+
+    <!-- Admin content area (hidden initially) -->
+    <div id="adminContent" style="display:none;">
+      <h2 style="font-size:1.5rem; margin:0 0 20px; color:var(--primary-color);">Submitted Reports</h2>
+      <div id="reportsContainer"></div>
+      <div style="margin-top:24px;">
+        <a href="index.html" class="btn btn-secondary">Back to Home</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" style="margin-top:40px;">
+    <div class="footer-inner">
+      <p class="footer-copy">&copy; 2026 Yadav Authentication Project. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script type="module" src="admin-panel.js"></script>
+</body>
+</html>
