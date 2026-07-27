@@ -131,11 +131,31 @@
    <div id="helpSupportPanel" class="option-panel">
   <h2>Help &amp; Support</h2>
   <p>If you need assistance, please check the documentation or contact support.<br/>Email: yadavsubba2003@gmail.com</p>
-  <h3 style="font-size:1.1rem; margin:20px 0 12px; color:var(--primary-color);">Report an Issue</h3>
-  <p>Describe the problem you encountered.</p>
-  <textarea id="issueDescription" rows="4" placeholder="Explain the issue..."></textarea>
-  <button class="btn-submit" id="submitIssueBtn">Submit Report</button>
-  <div id="issueMsg" style="margin-top:12px;"></div>
+
+  <h3 style="font-size:1.1rem; margin:20px 0 12px; color:var(--primary-color);">Send us a message</h3>
+  <form id="contactForm" novalidate>
+    <div class="form-group">
+      <label for="contactSubject">Subject</label>
+      <input type="text" id="contactSubject" placeholder="e.g., Bug report, Feature request" />
+    </div>
+    <div class="form-group">
+      <label for="contactMessage">Message</label>
+      <textarea id="contactMessage" rows="5" placeholder="Describe the issue or suggestion..." style="width:100%; padding:10px; border:1px solid var(--border-color); border-radius:var(--border-radius); font-family:var(--font-family); font-size:0.95rem; resize:vertical;"></textarea>
+    </div>
+    <button type="submit" class="btn-submit" id="sendContactBtn">Send Message</button>
+    <div id="contactMsg" style="margin-top:12px;"></div>
+  </form>
+</div>
+
+<!-- Success Modal (reused for contact form) -->
+<div class="modal-overlay" id="contactSuccessModal">
+  <div class="modal-dialog">
+    <h3>Message Sent</h3>
+    <p>Your message has been received. We'll get back to you soon.</p>
+    <div class="modal-actions">
+      <button class="btn" id="closeContactModal">Close</button>
+    </div>
+  </div>
 </div>
     <div id="deleteAccountPanel" class="option-panel">
   <h2>Delete Account</h2>
