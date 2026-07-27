@@ -3,6 +3,8 @@ import { db } from './firestore.js';
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js";
 
 const contactForm = document.getElementById('contactForm');
+const subjectType = document.getElementById('contactSubjectType');
+const customSubjectGroup = document.getElementById('customSubjectGroup');
 const subjectInput = document.getElementById('contactSubject');
 const messageInput = document.getElementById('contactMessage');
 const sendBtn = document.getElementById('sendContactBtn');
@@ -10,8 +12,16 @@ const msgDiv = document.getElementById('contactMsg');
 const successModal = document.getElementById('contactSuccessModal');
 const closeModalBtn = document.getElementById('closeContactModal');
 
-// Universal status container (optional)
-const universalStatus = document.getElementById('universalStatus');
+// Show/hide custom subject field based on dropdown
+subjectType.addEventListener('change', () => {
+  if (subjectType.value === 'Other') {
+    customSubjectGroup.style.display = 'block';
+    subjectInput.required = true;
+  } else {
+    customSubjectGroup.style.display = 'none';
+    subjectInput.required = false;
+  }
+});
 
 function showInlineMsg(element, message, type) {
   const className = type === 'success' ? 'success-msg' : 'error-msg';
@@ -20,11 +30,24 @@ function showInlineMsg(element, message, type) {
 
 contactForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  const subject = subjectInput.value.trim();
+
+  // Determine the final subject
+  let finalSubject = '';
+  if (subjectType.value === 'Other') {
+    finalSubject = subjectInput.value.trim();
+  } else {
+    finalSubject = subjectType.value;
+  }
+
   const message = messageInput.value.trim();
 
-  if (!subject || !message) {
-    showInlineMsg(msgDiv, 'Please fill in both the subject and message.', 'error');
+  // Validation
+  if (!finalSubject) {
+    showInlineMsg(msgDiv, 'Please select a topic or enter a custom subject.', 'error');
+    return;
+  }
+  if (!message) {
+    showInlineMsg(msgDiv, 'Please enter a message.', 'error');
     return;
   }
 
@@ -36,7 +59,7 @@ contactForm.addEventListener('submit', async (e) => {
     const docData = {
       email: user ? user.email : 'anonymous',
       displayName: user ? (user.displayName || '') : '',
-      subject: subject,
+      subject: finalSubject,
       message: message,
       createdAt: serverTimestamp()
     };
@@ -44,9 +67,11 @@ contactForm.addEventListener('submit', async (e) => {
     await addDoc(collection(db, "supportTickets"), docData);
 
     // Clear form
+    subjectType.value = '';
+    customSubjectGroup.style.display = 'none';
     subjectInput.value = '';
     messageInput.value = '';
-    showInlineMsg(msgDiv, '', ''); // clear any previous error
+    showInlineMsg(msgDiv, '', ''); // clear any error
 
     // Show success modal
     successModal.classList.add('active');
@@ -60,10 +85,8 @@ contactForm.addEventListener('submit', async (e) => {
   }
 });
 
-// Modal close handlers
-closeModalBtn.addEventListener('click', () => {
-  successModal.classList.remove('active');
-});
+// Modal close
+closeModalBtn.addEventListener('click', () => successModal.classList.remove('active'));
 successModal.addEventListener('click', (e) => {
   if (e.target === successModal) successModal.classList.remove('active');
 });
